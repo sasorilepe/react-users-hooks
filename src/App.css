@@ -1,33 +1,41 @@
 .App {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: 500;
+}
+.App__user-list{
+  padding: 16px;
+}
+.App__user-list__button{
+  border-radius: 100%;
+  background: #17A0FB;
+  box-shadow: 2px 2px 4px rgba(74, 74, 74, 0.25);
+  width: 56px;
+  height: 56px;
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  color: white;
+  font-size: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 16px;
+}
+.App__user-list__button div{
+  margin-bottom: 5px;
+}
+.App__user-form{
+  padding: 20px 17px 0 15px;
+}
+.App__user-form__save{
+  outline: inherit;
+  border: none;
+  background: white;
+  font-size: 12px;
+  line-height: 14px;
+  color: #17A0FB;
+  float: right;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

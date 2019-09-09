@@ -1,0 +1,10 @@
+.Header{
+  width: 100vw;
+  background: #17A0FB;
+  box-shadow: 2px 2px 4px rgba(164, 164, 164, 0.25);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #FFFFFF;
+  padding: 12px 0 11px 16px;
+}

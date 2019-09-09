@@ -1,0 +1,32 @@
+.User {
+  background: #FFFFFF;
+  border: 1px solid #EBEBEB;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 4px rgba(164, 164, 164, 0.25);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.User__name {
+  font-size: 16px;
+  line-height: 18px;
+  color: #5A5A5A;
+}
+.User__actions {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 10px;
+  line-height: 11px;
+  padding: 4px 0;
+}
+.User__actions__edit {
+  color: #17A0FB;
+  margin-right: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.User__actions__remove {
+  color: #EB5656;
+  cursor: pointer;
+}
