@@ -20,22 +20,9 @@ const UserRouter = appProps => {
         {appProps.users.map(user => {
           return (
             <Route key={user.id} exact path={`/edit/${user.id}`}
-              render={props => {
-                const updatedFields = appProps.fields.map(field => {
-                  switch (field.name) {
-                    case 'firstName':
-                      return { ...field, value: user.firstName };
-                    case 'lastName':
-                      return { ...field, value: user.lastName };
-                    default:
-                      return { ...field, value: user.age };
-                  }
-                });
-                return <UserFormView {...props} {...appProps}
-                  userUpdated={user}
-                  fields={updatedFields}
-                  title={`${user.firstName} ${user.lastName}`}></UserFormView>;
-              }} />
+              render={props => <UserFormView {...props} {...appProps} userUpdated={user}
+                title={`${user.firstName} ${user.lastName}`}>
+              </UserFormView>} />
           );
         })}
       </Switch>

@@ -3,6 +3,12 @@ import './UserForm.css';
 
 const UserForm = props => {
 
+  const fields = [
+    { label: 'First Name', name: 'firstName' },
+    { label: 'Last Name', name: 'lastName' },
+    { label: 'Age', name: 'age' }
+  ];
+
   const handleSubmit = event => {
 
     event.preventDefault();
@@ -15,7 +21,7 @@ const UserForm = props => {
     }
 
     // eslint-disable-next-line no-unused-vars
-    for (const field of props.fields) {
+    for (const field of fields) {
       const formElement = form.querySelector(`#${field.name}`);
       const formValue = formElement.value;
       if (!formValue.replace(/\s/g, '')) {
@@ -43,23 +49,33 @@ const UserForm = props => {
 
   return (
     <form onSubmit={handleSubmit} className="App__user-form">
-      {props.fields.map(field => {
-        return (
-          <div key={field.name} className="Input">
-            <div className="Input__label">
-              <label>{field.label}</label>
-            </div>
-            <input
-              id={field.name}
-              name={field.name}
-              className="Input__input"
-              placeholder={field.placeholder}
-              defaultValue={field.value}
-              type={field.type} />
-          </div>
-        );
-      })}
+
+      <div className="Input">
+        <div className="Input__label">
+          <label>First Name</label>
+        </div>
+        <input id="firstName" name="firstName" className="Input__input" placeholder="i.e John" type="text"
+          defaultValue={props.userUpdated ? props.userUpdated.firstName : null} />
+      </div>
+
+      <div className="Input">
+        <div className="Input__label">
+          <label>Last Name</label>
+        </div>
+        <input id="lastName" name="lastName" className="Input__input" placeholder="i.e Doe" type="text"
+          defaultValue={props.userUpdated ? props.userUpdated.lastName : null} />
+      </div>
+
+      <div className="Input">
+        <div className="Input__label">
+          <label>Age</label>
+        </div>
+        <input id="age" name="age" className="Input__input" placeholder="i.e 21" type="number"
+          defaultValue={props.userUpdated ? props.userUpdated.age : null} />
+      </div>
+
       <input type="submit" className="App__user-form__save" value="SAVE" />
+
     </form>
   );
 };
