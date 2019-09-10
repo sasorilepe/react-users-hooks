@@ -1,48 +1,20 @@
 import React from 'react';
-import Header from '../components/Header/Header';
-import UserList from '../components/UserList/UserList';
-import UserForm from '../components/UserForm/UserForm';
-import Alert from '../components/Alert/Alert';
+import UserListView from '../views/UserListView';
+import UserFormView from '../views/UserFormView';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const UserRouter = appProps => {
+
   return (
     <Router>
       <Switch>
 
         {/* List of users */}
-        <Route exact path="/"
-          render={props => {
-            return (
-              <div className="App">
-                <Header title="User List"></Header>
-                <UserList {...props}
-                  setAlert={appProps.setAlert}
-                  setUsers={appProps.setUsers}
-                  users={appProps.users}>
-                </UserList>
-                <Alert setAlert={appProps.setAlert}>{appProps.alert}</Alert>
-              </div>
-            );
-          }} />
+        <Route exact path="/" render={props => <UserListView {...props} {...appProps}></UserListView>} />
 
         {/* Create users */}
         <Route exact path="/create"
-          render={props => {
-            return (
-              <div className="App">
-                <Header title="Add New User"></Header>
-                <UserForm {...props}
-                  users={appProps.users}
-                  idCount={appProps.idCount}
-                  setIdCount={appProps.setIdCount}
-                  setUsers={appProps.setUsers}
-                  setAlert={appProps.setAlert}
-                  fields={appProps.fields}>
-                </UserForm>
-              </div>
-            );
-          }} />
+          render={props => <UserFormView {...props} {...appProps}></UserFormView>} />
 
         {/* Edit users */}
         {appProps.users.map(user => {
@@ -59,18 +31,10 @@ const UserRouter = appProps => {
                       return { ...field, value: user.age };
                   }
                 });
-                return (
-                  <div className="App">
-                    <Header title={`${user.firstName} ${user.lastName}`}></Header>
-                    <UserForm {...props}
-                      userUpdated={user}
-                      users={appProps.users}
-                      setUsers={appProps.setUsers}
-                      setAlert={appProps.setAlert}
-                      fields={updatedFields}>
-                    </UserForm>
-                  </div>
-                );
+                return <UserFormView {...props} {...appProps}
+                  userUpdated={user}
+                  fields={updatedFields}
+                  title={`${user.firstName} ${user.lastName}`}></UserFormView>;
               }} />
           );
         })}

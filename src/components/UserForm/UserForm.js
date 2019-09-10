@@ -8,13 +8,10 @@ const UserForm = props => {
     event.preventDefault();
 
     const form = event.target;
-    let user, id;
 
+    let user = {};
     if (props.userUpdated) {
       user = { ...props.userUpdated };
-    } else {
-      id = props.idCount + 1;
-      user = { id };
     }
 
     // eslint-disable-next-line no-unused-vars
@@ -37,7 +34,6 @@ const UserForm = props => {
     } else {
       alertMessage += 'created';
       users.push(user);
-      props.setIdCount(id);
     }
 
     props.setUsers(users);

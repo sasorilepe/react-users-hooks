@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserRouter from './routes/UserRouter'
+import { getAllUsers } from './controllers/UserController';
 import './App.css';
-
 
 function App() {
 
-  const [users, setUsers] = useState([
-    { id: 1, firstName: 'Juan', lastName: 'Doe', age: 15 }
-  ]);
-
-  const [idCount, setIdCount] = useState(users.length);
+  const [users, setUsers] = useState([]);
 
   const [alert, setAlert] = useState(null);
 
@@ -19,12 +15,19 @@ function App() {
     { label: 'Age', placeholder: 'i.e 21', name: 'age', type: 'number' }
   ];
 
+  useEffect(() => {
+    async function getUsers() {
+      const response = await getAllUsers();
+      const userData = response.results;
+      setUsers(userData);
+    }
+    getUsers();
+  }, []);
+
   return (
     <UserRouter
       users={users}
       setUsers={setUsers}
-      idCount={idCount}
-      setIdCount={setIdCount}
       alert={alert}
       setAlert={setAlert}
       fields={fields}>
