@@ -2,7 +2,6 @@ import React from 'react';
 import './UserForm.css';
 import { Link } from "react-router-dom";
 
-
 const UserForm = props => {
 
   const handleSubmit = event => {
@@ -35,6 +34,7 @@ const UserForm = props => {
       users[index] = user;
       props.setAlert(alert);
       props.setUsers(users);
+      document.getElementById('sendForm').click();
     } else {
       const alert = `User "${user.firstName} ${user.lastName}" created`;
       users.push(user);
