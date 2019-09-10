@@ -1,6 +1,5 @@
 import React from 'react';
 import './UserForm.css';
-import { Link } from "react-router-dom";
 
 const UserForm = props => {
 
@@ -27,22 +26,23 @@ const UserForm = props => {
       }
       user[field.name] = formValue;
     }
+
     const users = [...props.users];
+    let alertMessage = `User "${user.firstName} ${user.lastName}" `;
+
     if (props.userUpdated) {
-      const alert = `User "${user.firstName} ${user.lastName}" updated`;
       const index = users.findIndex(originalUser => originalUser.id === user.id);
       users[index] = user;
-      props.setAlert(alert);
-      props.setUsers(users);
-      document.getElementById('sendForm').click();
+      alertMessage += 'updated';
     } else {
-      const alert = `User "${user.firstName} ${user.lastName}" created`;
+      alertMessage += 'created';
       users.push(user);
-      props.setAlert(alert);
       props.setIdCount(id);
-      props.setUsers(users);
-      document.getElementById('sendForm').click();
     }
+
+    props.setUsers(users);
+    props.setAlert(alertMessage);
+    props.history.push('/');
   };
 
   return (
@@ -64,7 +64,6 @@ const UserForm = props => {
         );
       })}
       <input type="submit" className="App__user-form__save" value="SAVE" />
-      <Link id="sendForm" to='/'></Link>
     </form>
   );
 };
