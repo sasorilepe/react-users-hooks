@@ -1,18 +1,29 @@
 import React from 'react';
 import './UserForm.css';
+import { createNewUser, updateUser } from '../../controllers/UserController';
 
 const UserForm = props => {
 
-  const fields = [
-    { label: 'First Name', name: 'firstName' },
-    { label: 'Last Name', name: 'lastName' },
-    { label: 'Age', name: 'age' }
-  ];
+  const handleResponse = (resp, alertMessage) => {
+
+    if (resp.ok) {
+      props.updateUsers();
+      props.setAlert(alertMessage);
+      props.history.push('/');
+    } else {
+      resp.errors.forEach(error => console.error(error));
+    }
+  };
 
   const handleSubmit = event => {
 
     event.preventDefault();
 
+    const fields = [
+      { label: 'First Name', name: 'firstName' },
+      { label: 'Last Name', name: 'lastName' },
+      { label: 'Age', name: 'age' }
+    ];
     const form = event.target;
 
     let user = {};
@@ -30,21 +41,14 @@ const UserForm = props => {
       user[field.name] = formValue;
     }
 
-    const users = [...props.users];
     let alertMessage = `User "${user.firstName} ${user.lastName}" `;
 
     if (props.userUpdated) {
-      const index = users.findIndex(originalUser => originalUser.id === user.id);
-      users[index] = user;
       alertMessage += 'updated';
-    } else {
-      alertMessage += 'created';
-      users.push(user);
+      return updateUser(user).then(resp => handleResponse(resp, alertMessage));
     }
-
-    props.setUsers(users);
-    props.setAlert(alertMessage);
-    props.history.push('/');
+    alertMessage += 'created';
+    createNewUser(user).then(resp => handleResponse(resp, alertMessage));
   };
 
   return (

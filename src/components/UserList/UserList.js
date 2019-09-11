@@ -1,18 +1,22 @@
 import React from 'react';
 import './UserList.css';
 import { Link } from "react-router-dom";
+import { deleteUser } from '../../controllers/UserController';
 
 
 const userList = props => {
 
   const handleDelete = userId => {
-    const users = [...props.users];
-    const index = users.findIndex(user => user.id === userId);
-    const userDeleted = users[index];
-    const alert = `User "${userDeleted.firstName} ${userDeleted.lastName}" deleted`;
-    users.splice(index, 1);
-    props.setAlert(alert);
-    props.setUsers(users);
+
+    deleteUser(userId)
+      .then(() => {
+        const users = [...props.users];
+        const index = users.findIndex(user => user.id === userId);
+        const userDeleted = users[index];
+        const alert = `User "${userDeleted.firstName} ${userDeleted.lastName}" deleted`;
+        props.updateUsers();
+        props.setAlert(alert);
+      });
   };
 
   return (

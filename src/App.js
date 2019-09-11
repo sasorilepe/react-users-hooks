@@ -9,6 +9,12 @@ function App() {
 
   const [alert, setAlert] = useState(null);
 
+  const updateUsers = async () => {
+    const response = await getAllUsers();
+    const userData = response.results;
+    setUsers(userData);
+  }
+
   const fields = [
     { label: 'First Name', placeholder: 'i.e John', name: 'firstName', type: 'text' },
     { label: 'Last Name', placeholder: 'i.e Doe', name: 'lastName', type: 'text' },
@@ -16,18 +22,13 @@ function App() {
   ];
 
   useEffect(() => {
-    async function getUsers() {
-      const response = await getAllUsers();
-      const userData = response.results;
-      setUsers(userData);
-    }
-    getUsers();
+    updateUsers();
   }, []);
 
   return (
     <UserRouter
       users={users}
-      setUsers={setUsers}
+      updateUsers={updateUsers}
       alert={alert}
       setAlert={setAlert}
       fields={fields}>
