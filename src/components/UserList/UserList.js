@@ -14,7 +14,9 @@ const userList = props => {
         const index = users.findIndex(user => user.id === userId);
         const userDeleted = users[index];
         const alert = `User "${userDeleted.firstName} ${userDeleted.lastName}" deleted`;
-        props.updateUsers();
+
+        users.splice(index, 1);
+        props.setUsers(users);
         props.setAlert(alert);
       });
   };

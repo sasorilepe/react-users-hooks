@@ -13,7 +13,7 @@ function App() {
     const response = await getAllUsers();
     const userData = response.results;
     setUsers(userData);
-  }
+  };
 
   const fields = [
     { label: 'First Name', placeholder: 'i.e John', name: 'firstName', type: 'text' },
@@ -28,7 +28,7 @@ function App() {
   return (
     <UserRouter
       users={users}
-      updateUsers={updateUsers}
+      setUsers={setUsers}
       alert={alert}
       setAlert={setAlert}
       fields={fields}>

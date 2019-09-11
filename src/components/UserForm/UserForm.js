@@ -7,9 +7,21 @@ const UserForm = props => {
   const handleResponse = (resp, alertMessage) => {
 
     if (resp.ok) {
-      props.updateUsers();
+
+      const userUpdated = { ...resp.result };
+      const users = [...props.users];
+
+      if (props.userUpdated) {
+        const index = users.findIndex(user => userUpdated.id === user.id);
+        users[index] = userUpdated;
+      } else {
+        users.push(userUpdated);
+      }
+
+      props.setUsers(users);
       props.setAlert(alertMessage);
       props.history.push('/');
+
     } else {
       resp.errors.forEach(error => console.error(error));
     }
